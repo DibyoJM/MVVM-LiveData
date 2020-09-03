@@ -15,8 +15,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.altimetrik.albumsearch.R;
 import com.squareup.picasso.Picasso;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class AlbumListAdapter extends RecyclerView.Adapter<AlbumListAdapter.ViewHolder> implements Filterable {
 
@@ -47,7 +50,12 @@ public class AlbumListAdapter extends RecyclerView.Adapter<AlbumListAdapter.View
             holder.trackName.setText(mDatasetFilter.get(position).getTrackName());
             //holder.collectionName.setText(mDatasetFilter.get(position).collectionName);
             holder.collectionPrice.setText(String.format("$ %s", mDatasetFilter.get(position).getCollectionPrice()));
-            holder.releaseDate.setText(mDatasetFilter.get(position).getReleaseDate());
+
+            SimpleDateFormat inputDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.US);
+            SimpleDateFormat outputDateFormat = new SimpleDateFormat("MMM dd, HH:mm", Locale.getDefault());
+            Date startDate = inputDateFormat.parse(mDatasetFilter.get(position).getReleaseDate());
+            assert startDate != null;
+            holder.releaseDate.setText(outputDateFormat.format(startDate));
 
             Picasso.get()
                     .load(mDatasetFilter.get(position).getArtworkUrl100())

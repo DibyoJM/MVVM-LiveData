@@ -17,8 +17,8 @@ import java.util.ArrayList;
 
 public class MainViewModel extends AndroidViewModel {
 
-    MutableLiveData<ArrayList<AlbumData>> albumLiveData;
-    ArrayList<AlbumData> albumDataArrayList;
+    private MutableLiveData<ArrayList<AlbumData>> albumLiveData;
+    private ArrayList<AlbumData> albumDataArrayList;
 
     public MainViewModel(@NonNull Application application) throws JSONException {
         super(application);
@@ -26,7 +26,7 @@ public class MainViewModel extends AndroidViewModel {
         init();
     }
 
-    public MutableLiveData<ArrayList<AlbumData>> getAlbumMutableLiveData() {
+    MutableLiveData<ArrayList<AlbumData>> getAlbumMutableLiveData() {
         return albumLiveData;
     }
 

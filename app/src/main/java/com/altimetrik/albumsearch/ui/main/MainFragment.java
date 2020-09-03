@@ -27,6 +27,7 @@ public class MainFragment extends Fragment implements LifecycleOwner {
     private RecyclerView recyclerView;
     private EditText searchBox;
     private AlbumListAdapter adapter;
+
     private Observer<ArrayList<AlbumData>> userListUpdateObserver = new Observer<ArrayList<AlbumData>>() {
         @Override
         public void onChanged(ArrayList<AlbumData> albumDataArrayList) {
@@ -82,5 +83,4 @@ public class MainFragment extends Fragment implements LifecycleOwner {
         MainViewModel mViewModel = new ViewModelProvider(this).get(MainViewModel.class);
         mViewModel.getAlbumMutableLiveData().observe(getViewLifecycleOwner(), userListUpdateObserver);
     }
-
 }
