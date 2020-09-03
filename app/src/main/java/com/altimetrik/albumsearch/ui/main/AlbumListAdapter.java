@@ -1,6 +1,5 @@
 package com.altimetrik.albumsearch.ui.main;
 
-import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,14 +43,14 @@ public class AlbumListAdapter extends RecyclerView.Adapter<AlbumListAdapter.View
     @Override
     public void onBindViewHolder(@NonNull final AlbumListAdapter.ViewHolder holder, int position) {
         try {
-            holder.artistName.setText(mDatasetFilter.get(position).artistName);
-            holder.trackName.setText(mDatasetFilter.get(position).trackName);
+            holder.artistName.setText(mDatasetFilter.get(position).getArtistName());
+            holder.trackName.setText(mDatasetFilter.get(position).getTrackName());
             //holder.collectionName.setText(mDatasetFilter.get(position).collectionName);
-            holder.collectionPrice.setText(String.format("$ %s", mDatasetFilter.get(position).collectionPrice));
-            holder.releaseDate.setText(mDatasetFilter.get(position).releaseDate);
+            holder.collectionPrice.setText(String.format("$ %s", mDatasetFilter.get(position).getCollectionPrice()));
+            holder.releaseDate.setText(mDatasetFilter.get(position).getReleaseDate());
 
             Picasso.get()
-                    .load(mDatasetFilter.get(position).artworkUrl100)
+                    .load(mDatasetFilter.get(position).getArtworkUrl100())
                     .into(holder.imgView);
 
         } catch (Exception e) {
@@ -77,8 +76,8 @@ public class AlbumListAdapter extends RecyclerView.Adapter<AlbumListAdapter.View
                 } else {
                     List<AlbumData> filteredList = new ArrayList<>();
                     for (AlbumData row : mDataset) {
-                        if (row.artistName.toLowerCase().contains(charString.toLowerCase()) || row.trackName.toLowerCase().contains(charString.toLowerCase())) {
-                            Log.i(charString, "=====" + row.artistName);
+                        if (row.getArtistName().toLowerCase().contains(charString.toLowerCase()) || row.getTrackName().toLowerCase().contains(charString.toLowerCase())) {
+                            Log.i(charString, "=====" + row.getArtistName());
                             filteredList.add(row);
                         }
                     }
@@ -120,7 +119,5 @@ public class AlbumListAdapter extends RecyclerView.Adapter<AlbumListAdapter.View
             imgView = itemView.findViewById(R.id.img_view);
 
         }
-
-
     }
 }
